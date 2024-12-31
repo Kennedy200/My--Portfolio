@@ -25,6 +25,16 @@ const HeroSection = () => {
     }
   };
 
+  // Download CV function
+  const handleDownloadCV = () => {
+    const link = document.createElement("a");
+    link.href = "/SOFTWARE DEVELOPER RESUME.pdf";  // Path to CV in the public folder
+    link.download = "Software_Developer_CV.pdf";  // Name of the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="bg-[#121212] text-white min-h-screen scroll-smooth">
       {/* Navbar */}
@@ -111,7 +121,10 @@ const HeroSection = () => {
           </h1>
           {/* Buttons */}
           <div className="flex justify-center md:justify-start space-x-4">
-            <button className="bg-blue-500 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-600 transition">
+            <button
+              onClick={handleDownloadCV}
+              className="bg-blue-500 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-600 transition"
+            >
               <FiDownload className="mr-2" />
               Download CV
             </button>
