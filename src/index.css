@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply scroll-smooth;
+  overflow-x: hidden;
+}
+
+input:focus, textarea:focus {
+  @apply ring-2 ring-blue-500;
+}
+
+.submit-btn:hover, .start-project:hover {
+  @apply shadow-lg transform scale-105;
+}
+
+.contact-icons i:hover {
+  @apply transform scale-110;
+}
