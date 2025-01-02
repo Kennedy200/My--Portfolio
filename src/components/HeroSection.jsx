@@ -9,19 +9,12 @@ const HeroSection = () => {
     setNavOpen(!navOpen);
   };
 
-  // Scroll to Contact Section
-  const handleScrollToContact = () => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // Scroll to the next section
-  const handleScrollDown = () => {
-    const nextSection = document.getElementById("next-section");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
+  // Scroll to Section by ID
+  const handleScrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setNavOpen(false); // Close mobile menu after click
     }
   };
 
@@ -50,6 +43,12 @@ const HeroSection = () => {
             <li key={item}>
               <a
                 href={`#${item.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScrollToSection(
+                    item.toLowerCase() === "work" ? "skills" : item.toLowerCase()
+                  );
+                }}
                 className="text-gray-400 hover:bg-white hover:text-black px-4 py-2 rounded-full transition-colors duration-300"
               >
                 {item}
@@ -60,7 +59,7 @@ const HeroSection = () => {
 
         {/* Contact Me Button (Desktop) */}
         <button
-          onClick={handleScrollToContact}
+          onClick={() => handleScrollToSection("contact")}
           className="hidden md:block bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition"
         >
           Contact Me
@@ -83,8 +82,13 @@ const HeroSection = () => {
             <li key={item}>
               <a
                 href={`#${item.toLowerCase()}`}
-                onClick={toggleNavbar}
-                className="text-gray-300 hover:bg-white hover:text-black px-4 py-2 rounded-full transition-colors duration-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScrollToSection(
+                    item.toLowerCase() === "work" ? "skills" : item.toLowerCase()
+                  );
+                }}
+                className="text-gray-300 hover:text-white px-4 py-2 rounded-full transition-colors duration-300"
               >
                 {item}
               </a>
@@ -92,11 +96,8 @@ const HeroSection = () => {
           ))}
           <li>
             <button
-              onClick={() => {
-                toggleNavbar();
-                handleScrollToContact();
-              }}
-              className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition"
+              onClick={() => handleScrollToSection("contact")}
+              className="text-gray-300 px-4 py-2 rounded-full transition-colors duration-300 mobile-contact active:bg-white active:text-black"
             >
               Contact Me
             </button>
@@ -129,7 +130,7 @@ const HeroSection = () => {
               Download CV
             </button>
             <button
-              onClick={handleScrollDown}
+              onClick={() => handleScrollToSection("next-section")}
               className="bg-gray-700 text-white px-6 py-2 rounded-lg flex items-center hover:bg-gray-600 transition"
             >
               <FaArrowDown className="mr-2" />
@@ -147,6 +148,20 @@ const HeroSection = () => {
           />
         </div>
       </section>
+
+      {/* Custom Mobile CSS */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .mobile-contact:hover {
+            background: none; /* Remove hover background */
+            color: inherit;
+          }
+          .mobile-contact:active {
+            background: white;
+            color: black;
+          }
+        }
+      `}</style>
     </div>
   );
 };

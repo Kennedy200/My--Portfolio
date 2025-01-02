@@ -3,7 +3,10 @@ import { motion } from "framer-motion";
 
 const Skills = () => {
   return (
-    <section className="bg-black text-white py-20 overflow-hidden px-5 md:px-16 lg:px-32">
+    <section
+      id="skills"  // Added ID here for scrolling
+      className="bg-black text-white py-20 overflow-hidden px-5 md:px-16 lg:px-32"
+    >
       <div className="text-center mb-12">
         <h2 className="text-5xl font-extrabold tracking-wide">
           Experience & Education
